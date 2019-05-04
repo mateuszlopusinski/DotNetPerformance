@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Md5VsSha256</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.10.14, OS=Windows 10.0.17134
+Intel Core i7-7700HQ CPU 2.80GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
+Frequency=2742189 Hz, Resolution=364.6722 ns, Timer=TSC
+.NET Core SDK=2.1.505
+  [Host] : .NET Core 2.1.9 (CoreCLR 4.6.27414.06, CoreFX 4.6.27415.01), 64bit RyuJIT
+  Core   : .NET Core 2.1.9 (CoreCLR 4.6.27414.06, CoreFX 4.6.27415.01), 64bit RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method</th><th>Job</th><th>Runtime</th><th>IsBaseline</th><th>N</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Scaled</th><th>ScaledSD</th><th>Rank</th>
+</tr>
+</thead><tbody><tr><td>Sha256</td><td>Default</td><td>Clr</td><td>True</td><td>1000</td><td>NA</td><td>NA</td><td>NA</td><td>?</td><td>?</td><td>?</td>
+</tr><tr><td>Sha256</td><td>Core</td><td>Core</td><td>Default</td><td>1000</td><td>6.739 us</td><td>0.1317 us</td><td>0.1568 us</td><td>?</td><td>?</td><td>1</td>
+</tr><tr><td>Md5</td><td>Default</td><td>Clr</td><td>True</td><td>1000</td><td>NA</td><td>NA</td><td>NA</td><td>?</td><td>?</td><td>?</td>
+</tr><tr><td>Md5</td><td>Core</td><td>Core</td><td>Default</td><td>1000</td><td>3.119 us</td><td>0.0707 us</td><td>0.0627 us</td><td>?</td><td>?</td><td>1</td>
+</tr><tr><td>Sha256</td><td>Default</td><td>Clr</td><td>True</td><td>10000</td><td>NA</td><td>NA</td><td>NA</td><td>?</td><td>?</td><td>?</td>
+</tr><tr><td>Sha256</td><td>Core</td><td>Core</td><td>Default</td><td>10000</td><td>64.594 us</td><td>1.2758 us</td><td>2.6911 us</td><td>?</td><td>?</td><td>1</td>
+</tr><tr><td>Md5</td><td>Default</td><td>Clr</td><td>True</td><td>10000</td><td>NA</td><td>NA</td><td>NA</td><td>?</td><td>?</td><td>?</td>
+</tr><tr><td>Md5</td><td>Core</td><td>Core</td><td>Default</td><td>10000</td><td>27.094 us</td><td>0.1606 us</td><td>0.1341 us</td><td>?</td><td>?</td><td>1</td>
+</tr></tbody></table>
+</body>
+</html>
