@@ -9,4 +9,8 @@
     <PackageReference Include="BenchmarkDotNet" Version="0.10.14" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CoreResourceMeter\CoreResourceMeter.csproj" />
+  </ItemGroup>
+
 </Project>

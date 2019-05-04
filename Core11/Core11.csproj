@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp1.1;net46</TargetFrameworks>
+    <TargetFrameworks>netcoreapp1.1</TargetFrameworks>
     <AssemblyName>Core11</AssemblyName>
     <RootNamespace>Core11</RootNamespace>
   </PropertyGroup>
@@ -15,6 +15,10 @@
     <PackageReference Include="SystemPerformance">
       <Version>1.0.0.6</Version>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoreResourceMeter\CoreResourceMeter.csproj" />
   </ItemGroup>
 
 </Project>

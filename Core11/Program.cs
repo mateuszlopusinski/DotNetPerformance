@@ -1,70 +1,72 @@
-﻿using System;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Attributes.Jobs;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
-using BenchmarkDotNet.Toolchains.CsProj;
+using CoreResourceMeter;
 
 namespace Core11
 {
     public class Program
     {
+        #region Nested classes
 
+        //public class MultipleRuntimes : ManualConfig
+        //{
+        //    public MultipleRuntimes()
+        //    {
+        //        Add(Job.Default.With(CsProjCoreToolchain.NetCoreApp11)); // .NET Core 2.1
 
-        public class MultipleRuntimes : ManualConfig
+        //        Add(Job.Default.With(CsProjClassicNetToolchain.Net46)); // NET 4.6.2
+        //    }
+        //}
+
+        //[Config(typeof(MultipleRuntimes))]
+        [ClrJob]
+        [CoreJob]
+        public class Benchmark
         {
-            public MultipleRuntimes()
-            {
-                Add(Job.Default.With(CsProjCoreToolchain.NetCoreApp11)); // .NET Core 2.1
-
-                Add(Job.Default.With(CsProjClassicNetToolchain.Net46)); // NET 4.6.2
-            }
-        }
-
-        [Config(typeof(MultipleRuntimes))]
-        [ClrJob, CoreJob]
-        public class Md5VsSha256
-        {
+            #region Private fields
 
             [Params(1000, 10000)]
             public int N;
+
+            #endregion
+            #region Public static methods
+
+            [Benchmark]
+            public static void Loop()
+            {
+                ResourceMeterClass.InvokerResourceMeters();
+                LoopMethod();
+            }
+
+            #endregion
+            #region Public methods
 
             [GlobalSetup]
             public void Setup()
             {
             }
 
-            //[Benchmark]
-            //public byte[] Sha256() => sha256.ComputeHash(data);
-
-            //[Benchmark]
-            //public byte[] Md5() => md5.ComputeHash(data);
-
-
-            [Benchmark]
-            public static int Calculate()
-            {
-                int res = 123;
-                for (int i = 0; i < 10000; i++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        res = res * res;
-                    }
-                    else
-                    {
-                        res = res + 1;
-                    }
-                }
-                return res;
-            }
+            #endregion
         }
+
+        #endregion
         #region Private methods
+
+        private static void LoopMethod()
+        {
+            var res = 123;
+            for (var i = 0; i < 1000000; i++)
+                if (i % 2 == 0)
+                    res = res * res;
+                else
+                    res = res + 1;
+        }
 
         private static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<Md5VsSha256>();
+            Summary summary = BenchmarkRunner.Run<Benchmark>();
         }
 
         #endregion

@@ -1,66 +1,66 @@
-﻿using System;
-using System.Security.Cryptography;
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Attributes.Columns;
-using BenchmarkDotNet.Attributes.Exporters;
-using BenchmarkDotNet.Attributes.Jobs;
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
+using CoreResourceMeter;
 
 namespace Core21
 {
     //[ClrJob(true), CoreJob]
     //[RPlotExporter, RankColumn]
-    public class Md5VsSha256
+    public class Benchmark
     {
-        private SHA256 sha256 = SHA256.Create();
-        private MD5 md5 = MD5.Create();
-        private byte[] data;
+        #region Private fields
 
         [Params(1000, 10000)]
         public int N;
 
-        [GlobalSetup]
-        public void Setup()
-        {
-            data = new byte[N];
-            new Random(42).NextBytes(data);
-        }
+        #endregion
+        #region Public static methods
 
         //[Benchmark]
         //public byte[] Sha256() => sha256.ComputeHash(data);
 
         //[Benchmark]
         //public byte[] Md5() => md5.ComputeHash(data);
-        
 
         [Benchmark]
-        public static int Calculate()
+        public static void Loop()
         {
-            int res = 123;
-            for (int i = 0; i < 10000; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    res = res * res;
-                }
-                else
-                {
-                    res = res + 1;
-                }
-            }
-            return res;
+            ResourceMeterClass.InvokerResourceMeters();
+            LoopMethod();
         }
-    }
 
+        #endregion
+        #region Public methods
+
+        [GlobalSetup]
+        public void Setup()
+        {
+        }
+
+        #endregion
+        #region Private methods
+
+        private static void LoopMethod()
+        {
+            var res = 123;
+            for (var i = 0; i < 1000000; i++)
+                if (i % 2 == 0)
+                    res = res * res;
+                else
+                    res = res + 1;
+        }
+
+        #endregion
+    }
 
     internal class Program
     {
-        #region Private methods
+        #region Public static methods
 
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<Md5VsSha256>();
-            Console.ReadLine();
+            Summary summary = BenchmarkRunner.Run<Benchmark>();
         }
 
         #endregion
