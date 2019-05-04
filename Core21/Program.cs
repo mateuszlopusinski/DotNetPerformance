@@ -8,8 +8,8 @@ using BenchmarkDotNet.Running;
 
 namespace Core21
 {
-    [ClrJob(true), CoreJob]
-    [RPlotExporter, RankColumn]
+    //[ClrJob(true), CoreJob]
+    //[RPlotExporter, RankColumn]
     public class Md5VsSha256
     {
         private SHA256 sha256 = SHA256.Create();
@@ -26,11 +26,30 @@ namespace Core21
             new Random(42).NextBytes(data);
         }
 
-        [Benchmark]
-        public byte[] Sha256() => sha256.ComputeHash(data);
+        //[Benchmark]
+        //public byte[] Sha256() => sha256.ComputeHash(data);
+
+        //[Benchmark]
+        //public byte[] Md5() => md5.ComputeHash(data);
+        
 
         [Benchmark]
-        public byte[] Md5() => md5.ComputeHash(data);
+        public static int Calculate()
+        {
+            int res = 123;
+            for (int i = 0; i < 10000; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    res = res * res;
+                }
+                else
+                {
+                    res = res + 1;
+                }
+            }
+            return res;
+        }
     }
 
 

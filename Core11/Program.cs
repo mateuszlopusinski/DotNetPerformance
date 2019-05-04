@@ -1,11 +1,29 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Attributes.Jobs;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Toolchains.CsProj;
 
-namespace Framework46
+namespace Core11
 {
     public class Program
     {
 
+
+        public class MultipleRuntimes : ManualConfig
+        {
+            public MultipleRuntimes()
+            {
+                Add(Job.Default.With(CsProjCoreToolchain.NetCoreApp11)); // .NET Core 2.1
+
+                Add(Job.Default.With(CsProjClassicNetToolchain.Net46)); // NET 4.6.2
+            }
+        }
+
+        [Config(typeof(MultipleRuntimes))]
+        [ClrJob, CoreJob]
         public class Md5VsSha256
         {
 
@@ -42,10 +60,9 @@ namespace Framework46
                 return res;
             }
         }
-
         #region Private methods
 
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var summary = BenchmarkRunner.Run<Md5VsSha256>();
         }

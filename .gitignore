@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Core11/BenchmarkDotNet.Artifacts
+/Core21/BenchmarkDotNet.Artifacts
