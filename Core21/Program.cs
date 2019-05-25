@@ -9,60 +9,6 @@ using CoreResourceMeter;
 
 namespace Core21
 {
-    //[ClrJob(true), CoreJob]
-    //[RPlotExporter, RankColumn]
-    [RPlotExporter, RankColumn]
-    public class Benchmark
-    {
-        #region Private fields
-        
-        #endregion
-        #region Public static methods
-
-        [Benchmark]
-        public byte[] Md5()
-        {
-            return CalculateMd5Hash();
-        } 
-
-        [Benchmark]
-        public static void Loop()
-        {
-            ResourceMeterClass.InvokerResourceMeters();
-            LoopMethod();
-        }
-
-        #endregion
-        #region Public methods
-
-        [GlobalSetup]
-        public void Setup()
-        {
-        }
-
-        #endregion
-        #region Private methods
-
-        private static void LoopMethod()
-        {
-            var res = 123;
-            for (var i = 0; i < 1000000; i++)
-                if (i % 2 == 0)
-                    res = res * res;
-                else
-                    res = res + 1;
-        }
-
-        private static byte[] CalculateMd5Hash()
-        {
-            MD5 md5 = MD5.Create();
-            var data = new byte[1000];
-            new Random(42).NextBytes(data);
-            return md5.ComputeHash(data);
-        }
-
-        #endregion
-    }
 
     internal class Program
     {
@@ -70,7 +16,9 @@ namespace Core21
 
         public static void Main(string[] args)
         {
-            Summary summary = BenchmarkRunner.Run<Benchmark>();
+            Summary loop = BenchmarkRunner.Run<LoopBenchmark>();
+            Summary file = BenchmarkRunner.Run<FileBenchmark>();
+            Summary md5 = BenchmarkRunner.Run<Md5Benchmark>();
         }
 
         #endregion

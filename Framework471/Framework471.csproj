@@ -200,6 +200,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileBenchmark.cs" />
+    <Compile Include="LoopBenchmark.cs" />
+    <Compile Include="Md5Benchmark.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
