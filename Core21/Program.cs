@@ -18,8 +18,9 @@ namespace Core21
         {
             //Summary loop = BenchmarkRunner.Run<LoopBenchmark>();
             //Summary file = BenchmarkRunner.Run<FileBenchmark>();
-            //Summary md5 = BenchmarkRunner.Run<Md5Benchmark>();
+            //Summary md5 = BenchmarkRunner.Run<Md5Benchmark>();    
             Summary minumum = BenchmarkRunner.Run<NumbersLINQ>();
+            Summary objects = BenchmarkRunner.Run<LINQObjects>();
         }
 
         #endregion

@@ -30,7 +30,7 @@ namespace Framework471
         }
 
         [Benchmark]
-        public static void Loop()
+        public static void MinimumFinder()
         {
             ResourceMeterClass.InvokerResourceMeters();
             FindMinimum();
