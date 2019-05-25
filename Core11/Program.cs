@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System;
+using System.Security.Cryptography;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Attributes.Jobs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
@@ -21,17 +23,20 @@ namespace Core11
         //}
 
         //[Config(typeof(MultipleRuntimes))]
-        [ClrJob]
-        [CoreJob]
+        //[ClrJob]
+        //[CoreJob]
         public class Benchmark
         {
             #region Private fields
 
-            [Params(1000, 10000)]
-            public int N;
-
             #endregion
             #region Public static methods
+
+            [Benchmark]
+            public byte[] Md5()
+            {
+                return CalculateMd5Hash();
+            }
 
             [Benchmark]
             public static void Loop()
@@ -62,6 +67,14 @@ namespace Core11
                     res = res * res;
                 else
                     res = res + 1;
+        }
+
+        private static byte[] CalculateMd5Hash()
+        {
+            MD5 md5 = MD5.Create();
+            var data = new byte[1000];
+            new Random(42).NextBytes(data);
+            return md5.ComputeHash(data);
         }
 
         private static void Main(string[] args)

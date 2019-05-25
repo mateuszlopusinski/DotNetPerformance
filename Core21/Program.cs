@@ -1,4 +1,8 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System;
+using System.Security.Cryptography;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Attributes.Columns;
+using BenchmarkDotNet.Attributes.Exporters;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using CoreResourceMeter;
@@ -7,21 +11,19 @@ namespace Core21
 {
     //[ClrJob(true), CoreJob]
     //[RPlotExporter, RankColumn]
+    [RPlotExporter, RankColumn]
     public class Benchmark
     {
         #region Private fields
-
-        [Params(1000, 10000)]
-        public int N;
-
+        
         #endregion
         #region Public static methods
 
-        //[Benchmark]
-        //public byte[] Sha256() => sha256.ComputeHash(data);
-
-        //[Benchmark]
-        //public byte[] Md5() => md5.ComputeHash(data);
+        [Benchmark]
+        public byte[] Md5()
+        {
+            return CalculateMd5Hash();
+        } 
 
         [Benchmark]
         public static void Loop()
@@ -49,6 +51,14 @@ namespace Core21
                     res = res * res;
                 else
                     res = res + 1;
+        }
+
+        private static byte[] CalculateMd5Hash()
+        {
+            MD5 md5 = MD5.Create();
+            var data = new byte[1000];
+            new Random(42).NextBytes(data);
+            return md5.ComputeHash(data);
         }
 
         #endregion
