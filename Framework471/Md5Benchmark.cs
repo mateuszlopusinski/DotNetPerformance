@@ -15,9 +15,9 @@ namespace Framework471
     public class Md5Benchmark
     {
 
-        private static MD5 md5;
+        private MD5 md5;
 
-        private static byte[] data;
+        private byte[] data;
 
 
         private static byte[] CreateByteArray()
@@ -41,7 +41,7 @@ namespace Framework471
             return CalculateMd5Hash();
         }
 
-        private static byte[] CalculateMd5Hash()
+        private byte[] CalculateMd5Hash()
         {
             return md5.ComputeHash(data);
         }

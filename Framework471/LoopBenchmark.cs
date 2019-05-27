@@ -21,13 +21,13 @@ namespace Framework471
         }
 
         [Benchmark]
-        public static void Loop()
+        public void Loop()
         {
             ResourceMeterClass.InvokerResourceMeters();
             LoopMethod();
         }
 
-        private static void LoopMethod()
+        private void LoopMethod()
         {
             var res = 123;
             for (var i = 0; i < 1000000; i++)

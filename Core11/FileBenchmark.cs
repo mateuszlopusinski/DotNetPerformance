@@ -12,7 +12,7 @@ namespace Core11
     [RPlotExporter, RankColumn]
     public class FileBenchmark
     {
-        private static string[] Words;
+        private string[] Words;
 
 
         [GlobalSetup]
@@ -28,9 +28,8 @@ namespace Core11
             WriteFile();
         }
 
-        private static void WriteFile()
+        private void WriteFile()
         {
-            Words = GenearateWords();
             var path = "D:\\PWr\\Studia\\Magisterka\\Semestr 3\\Praca magisterska";
             var fullPath = Path.Combine(path, "test.txt");
             var stream = new FileStream(fullPath, FileMode.OpenOrCreate);

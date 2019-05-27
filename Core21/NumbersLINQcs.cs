@@ -12,7 +12,7 @@ namespace Core21
     [RPlotExporter, RankColumn]
     public class NumbersLINQ
     {
-        private static List<int> Numbers;
+        private List<int> Numbers;
 
         [GlobalSetup]
         public void Setup()
@@ -29,13 +29,13 @@ namespace Core21
         }
 
         [Benchmark]
-        public static void MinimumFinder()
+        public void MinimumFinder()
         {
             ResourceMeterClass.InvokerResourceMeters();
             FindMinimum();
         }
 
-        private static int FindMinimum()
+        private int FindMinimum()
         {
             int minimum = Numbers.Min();
             return minimum;

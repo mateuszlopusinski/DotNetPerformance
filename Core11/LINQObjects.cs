@@ -5,37 +5,38 @@ using System.Text;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Attributes.Columns;
 using BenchmarkDotNet.Attributes.Exporters;
+using BenchmarkDotNet.Attributes.Jobs;
 using CoreResourceMeter;
 
 namespace Core11
 {
     [RPlotExporter, RankColumn]
+    [SimpleJob(targetCount: 50)]
+    [ClrJob, CoreJob]
     public class LINQObjects
     {
         private class SampleObject
         {
             public string Text;
-
             public int Number;
-
             public bool Boolean;
         }
 
-        private static List<SampleObject> Objects;
+        private List<SampleObject> Objects;
 
         [GlobalSetup]
         public void Setup()
         {
             Random random = new Random();
             Objects = new List<SampleObject>();
-            const int Million = 1000000;
-            for (int i = 0; i < Million; i++)
+            const int thousand100 = 1000000;
+            for (int i = 0; i < thousand100; i++)
             {
                 var obj = InitializeObject();
                 Objects.Add(obj);
             }
             SampleObject searchObj = GetObjectToSearch();
-            Objects[random.Next(Million)] = searchObj;
+            Objects[random.Next(thousand100)] = searchObj;
         }
 
         private static SampleObject GetObjectToSearch()
@@ -63,7 +64,7 @@ namespace Core11
 
         private int GenerateRandomNumber()
         {
-            const int Billion = 1000000000;
+            const int Billion = 10000;
             Random random = new Random();
             int number = random.Next(1, Billion);
             return number;
@@ -83,17 +84,16 @@ namespace Core11
         }
 
         [Benchmark]
-        public static void Search()
+        public void Search()
         {
-            ResourceMeterClass.InvokerResourceMeters();
+            //ResourceMeterClass.InvokerResourceMeters();
             SearchForObject();
         }
 
-        private static IEnumerable<SampleObject> SearchForObject()
+        private IEnumerable<SampleObject> SearchForObject()
         {
-            var objectToSearch = Objects.Where(o => o.Text.Equals(GetObjectToSearch().Text));
+            var objectToSearch = Objects.Where(o => o.Text.Equals("abcdf13245"));
             return objectToSearch;
         }
-
     }
 }
