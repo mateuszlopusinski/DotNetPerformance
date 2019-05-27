@@ -30,6 +30,8 @@ namespace Framework471
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Net471.Md5Benchmark");
+            rmc.InvokerResourceMeters();
             data = CreateByteArray();
             md5 = MD5.Create();
         }
@@ -37,7 +39,6 @@ namespace Framework471
         [Benchmark]
         public byte[] Md5()
         {
-            ResourceMeterClass.InvokerResourceMeters();
             return CalculateMd5Hash();
         }
 

@@ -15,12 +15,13 @@ namespace Core21
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Core21.LoopBenchmark");
+            rmc.InvokerResourceMeters();
         }
 
         [Benchmark]
         public void Loop()
         {
-            ResourceMeterClass.InvokerResourceMeters();
             LoopMethod();
         }
 

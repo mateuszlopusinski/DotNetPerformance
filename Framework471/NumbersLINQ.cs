@@ -18,6 +18,8 @@ namespace Framework471
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Net471.NumbersLINQ");
+            rmc.InvokerResourceMeters();
             Random random = new Random();
             Numbers = new List<int>();
             const int Billion = 1000000000;
@@ -32,7 +34,6 @@ namespace Framework471
         [Benchmark]
         public void MinimumFinder()
         {
-            ResourceMeterClass.InvokerResourceMeters();
             FindMinimum();
         }
 

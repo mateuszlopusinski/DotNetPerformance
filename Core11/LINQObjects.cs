@@ -26,6 +26,8 @@ namespace Core11
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Core11.LINQObjects");
+            rmc.InvokerResourceMeters();
             Random random = new Random();
             Objects = new List<SampleObject>();
             const int thousand100 = 1000000;
@@ -85,7 +87,6 @@ namespace Core11
         [Benchmark]
         public void Search()
         {
-            //ResourceMeterClass.InvokerResourceMeters();
             SearchForObject();
         }
 

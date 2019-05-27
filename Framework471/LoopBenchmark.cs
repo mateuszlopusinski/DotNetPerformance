@@ -18,12 +18,13 @@ namespace Framework471
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Net471.LoopBenchmark");
+            rmc.InvokerResourceMeters();
         }
 
         [Benchmark]
         public void Loop()
         {
-            ResourceMeterClass.InvokerResourceMeters();
             LoopMethod();
         }
 

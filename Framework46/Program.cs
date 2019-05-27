@@ -22,7 +22,6 @@ namespace Framework46
             [Benchmark]
             public static void Loop()
             {
-                ResourceMeterClass.InvokerResourceMeters();
                 LoopMethod();
             }
 
@@ -32,6 +31,8 @@ namespace Framework46
             [GlobalSetup]
             public void Setup()
             {
+                ResourceMeterClass rmc = new ResourceMeterClass($"Net471{this.GetType().Name}");
+                rmc.InvokerResourceMeters();
             }
 
             #endregion

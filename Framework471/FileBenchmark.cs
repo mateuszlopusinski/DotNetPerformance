@@ -20,13 +20,14 @@ namespace Framework471
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Net471.FileBenchmark");
+            rmc.InvokerResourceMeters();
             Words = GenearateWords();
         }
 
         [Benchmark]
         public void FileOperation()
         {
-            ResourceMeterClass.InvokerResourceMeters();
             WriteFile();
         }
 

@@ -17,6 +17,8 @@ namespace Core21
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Core21.NumbersLINQ");
+            rmc.InvokerResourceMeters();
             Random random = new Random();
             Numbers = new List<int>();
             const int Billion = 1000000000;
@@ -31,7 +33,6 @@ namespace Core21
         [Benchmark]
         public void MinimumFinder()
         {
-            ResourceMeterClass.InvokerResourceMeters();
             FindMinimum();
         }
 

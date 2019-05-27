@@ -28,6 +28,8 @@ namespace Framework471
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Net471.LINQObjects");
+            rmc.InvokerResourceMeters();
             Random random = new Random();
             Objects = new List<SampleObject>();
             const int thousand100 = 1000000;
@@ -87,7 +89,6 @@ namespace Framework471
         [Benchmark]
         public void Search()
         {
-            //ResourceMeterClass.InvokerResourceMeters();
             SearchForObject();
         }
 

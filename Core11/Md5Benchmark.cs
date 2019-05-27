@@ -28,6 +28,9 @@ namespace Core11
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Core11.Md5Benchmark");
+            rmc.InvokerResourceMeters();
+
             data = CreateByteArray();
             md5 = MD5.Create();
         }
@@ -35,7 +38,6 @@ namespace Core11
         [Benchmark]
         public byte[] Md5()
         {
-            ResourceMeterClass.InvokerResourceMeters();
             return CalculateMd5Hash();
         }
 

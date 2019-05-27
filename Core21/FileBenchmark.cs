@@ -18,13 +18,14 @@ namespace Core21
         [GlobalSetup]
         public void Setup()
         {
+            ResourceMeterClass rmc = new ResourceMeterClass($"Core21.FileBenchmark");
+            rmc.InvokerResourceMeters();
             Words = GenearateWords();
         }
 
         [Benchmark]
         public void FileOperation()
         {
-            ResourceMeterClass.InvokerResourceMeters();
             WriteFile();
         }
 
