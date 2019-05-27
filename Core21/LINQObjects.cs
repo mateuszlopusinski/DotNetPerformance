@@ -11,8 +11,7 @@ using CoreResourceMeter;
 namespace Core21
 {
     [RPlotExporter, RankColumn]
-    [SimpleJob(targetCount: 50)]
-    [ClrJob, CoreJob]
+    //[SimpleJob(targetCount: 50)]
     public class LINQObjects
     {
         private class SampleObject

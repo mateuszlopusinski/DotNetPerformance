@@ -13,8 +13,7 @@ using FrameworkResourceMeter;
 namespace Framework471
 {
     [RPlotExporter, RankColumn]
-    [SimpleJob(targetCount: 50)]
-    [ClrJob, CoreJob]
+    //[SimpleJob(targetCount: 50)]
     public class LINQObjects
     {
         private class SampleObject
